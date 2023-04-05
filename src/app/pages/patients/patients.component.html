@@ -1,0 +1,70 @@
+<div class="grid-container">
+  <div class="search flex">
+    <h4>Population list</h4>
+    <form [formGroup]="searchForm">
+      <input
+        placeholder="Search doctors firstName"
+        formControlName="firstName"
+      />
+      <input placeholder="Search doctors lastName" formControlName="lastName" />
+    </form>
+
+    <ng-template #loaded>
+      <div *ngIf="!(members$ | async)?.length">No results found.</div>
+      <div
+        class="doctor flex"
+        *ngFor="let member of members$ | async as members"
+      >
+        <div class="info">
+          <div class="photo"></div>
+          <div class="flex">
+            <h6>{{ member.firstName }} {{ member.lastName }}</h6>
+            <button mat-raised-button (click)="selectMember(member.entityNo)">
+              Create appointment
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-container *ngIf="loadingSpinner | async; else loaded">
+      <div class="center">
+        <mat-progress-spinner
+          mode="indeterminate"
+          diameter="40"
+        ></mat-progress-spinner>
+      </div>
+    </ng-container>
+  </div>
+
+  <nb-card class="calendar" *ngIf="selectedMember$ | async as member">
+    <nb-card-header>
+      <ng-container>
+        <div class="doctor flex">
+          <div class="info">
+            <div class="photo"></div>
+            <div class="flex">
+              <h6>{{ member?.firstName }} {{ member?.lastName }}</h6>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </nb-card-header>
+    <nb-card-body class="flex">
+      <input
+        nbInput
+        placeholder="Pick Date"
+        [nbDatepicker]="dateTimePicker"
+        [(ngModel)]="selectedDate"
+      />
+
+      <nb-date-timepicker
+        #dateTimePicker
+        singleColumn
+        [step]="30"
+        [min]="minDate"
+      ></nb-date-timepicker>
+      <button mat-raised-button (click)="Book(member)">Book</button>
+    </nb-card-body>
+  </nb-card>
+</div>

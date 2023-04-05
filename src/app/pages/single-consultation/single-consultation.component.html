@@ -1,0 +1,35 @@
+<div class="item" *ngIf="booking">
+  <div class="date">
+    {{ booking.startTime | date : "medium" }}
+  </div>
+
+  <div class="info">
+    <div class="photo"></div>
+    <div *ngIf="currentUser?.entityNo === roles.PATIENT" class="flex">
+      <span *ngIf="doctorInfo">
+        <div>
+          {{ doctorInfo.firstName }}
+          {{ doctorInfo.lastName }}
+        </div>
+        <div>practiceNo: {{ doctorInfo.practiceNo }}</div>
+
+        <div *ngIf="perviusConsultation">Status: {{ booking.status }}</div>
+      </span>
+    </div>
+
+    <div *ngIf="currentUser?.entityNo === roles.DOCTOR" class="flex">
+      <span *ngIf="patientInfo">
+        {{ patientInfo.firstName }}
+        {{ patientInfo.lastName }}
+      </span>
+      <div *ngIf="booking.status === 'TENTATIVE'" class="buttons">
+        <button mat-raised-button (click)="acceptBooking(booking.id)">
+          Accept
+        </button>
+        <button mat-raised-button (click)="cancelBooking(booking.id)">
+          Reject
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

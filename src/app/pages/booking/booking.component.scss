@@ -1,0 +1,36 @@
+nb-card {
+  width: 45%;
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  padding: 1rem;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor {
+  padding: 0.5rem;
+
+  .info {
+    display: flex;
+    flex-direction: row;
+
+    gap: 0.5rem;
+    .photo {
+      height: 3rem;
+      width: 3rem;
+      border-radius: 100%;
+      background-color: black;
+    }
+  }
+  h6 {
+    margin: 0px;
+  }
+  p {
+    margin: 0.1rem;
+  }
+}

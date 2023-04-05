@@ -1,0 +1,45 @@
+<div class="grid-container">
+  <div class="map"><app-map></app-map></div>
+  <div class="search flex">
+    <form [formGroup]="searchForm">
+      <input
+        placeholder="Search doctors firstName"
+        formControlName="firstName"
+      />
+
+      <input placeholder="Search doctors lastName" formControlName="lastName" />
+    </form>
+
+    <div *ngIf="!(practitioners$ | async)?.length" class="warning">
+      No results found.
+    </div>
+
+    <div
+      class="doctor flex"
+      *ngFor="let practitioner of practitioners$ | async as practitioners"
+    >
+      <div class="info">
+        <div class="photo"></div>
+        <div class="flex">
+          <h6>{{ practitioner.firstName }} {{ practitioner.lastName }}</h6>
+          <p>Doctor specialisation: {{ practitioner.practiceNo }}</p>
+        </div>
+      </div>
+
+      <button
+        mat-raised-button
+        [routerLink]="['/booking/', practitioner.entityNo]"
+      >
+        Book
+      </button>
+    </div>
+  </div>
+  <!-- <ng-container *ngIf="loadingSpinner | async; else loaded">
+    <div class="center">
+      <mat-progress-spinner
+        mode="indeterminate"
+        diameter="40"
+      ></mat-progress-spinner>
+    </div>
+  </ng-container> -->
+</div>

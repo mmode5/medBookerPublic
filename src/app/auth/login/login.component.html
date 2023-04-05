@@ -1,0 +1,71 @@
+<nb-layout>
+  <nb-layout-column>
+    <form
+      [formGroup]="form"
+      (ngSubmit)="form.valid && handleSubmssion()"
+      class="container"
+    >
+      <h1>Login</h1>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error
+          *ngIf="form.controls['email'].errors && form.controls['email'].dirty"
+        >
+          <ng-container *ngIf="form.controls['email'].errors['required']">
+            Email is required
+          </ng-container>
+          <ng-container *ngIf="form.controls['email'].errors?.['email']">
+            Please enter a valid email
+          </ng-container>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        appearance="fill"
+        [ngClass]="{
+          'error-margin':
+            form.controls['password'].dirty &&
+            form.controls['password'].touched &&
+            form.controls['password'].errors &&
+            !form.controls['password'].errors['required'] &&
+            !form.controls['password'].errors['minlength'] &&
+            form.controls['password'].hasError('invalidPassword')
+        }"
+      >
+        <mat-label>Password</mat-label>
+
+        <input matInput type="password" formControlName="password" />
+
+        <mat-error
+          *ngIf="
+            form.controls['password'].errors && form.controls['password'].dirty
+          "
+        >
+          <ng-container *ngIf="form.controls['password'].errors['required']">
+            Password is required
+          </ng-container>
+
+          <ng-container *ngIf="form.controls['password'].errors['minlength']">
+            Password min length 6
+          </ng-container>
+
+          <ng-container
+            *ngIf="
+              form.controls['password'].hasError('invalidPassword') &&
+              !form.controls['password'].errors['minlength'] &&
+              !form.controls['password'].errors['required']
+            "
+          >
+            Password must contain at least one uppercase letter, one lowercase
+            letter, one number, and one special character.
+          </ng-container>
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" [disabled]="!form.valid">
+        login
+      </button>
+    </form>
+  </nb-layout-column>
+</nb-layout>

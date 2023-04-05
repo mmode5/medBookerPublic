@@ -1,0 +1,61 @@
+<ng-container *ngIf="currentUser?.entityNo === roles.PATIENT; else isDoctor">
+  <div class="container">
+    <button routerLink="/dashboard" routerLinkActive="active-button">
+      Dashboard
+    </button>
+    <button
+      mat-raised-button
+      routerLink="/search"
+      routerLinkActive="active-button"
+    >
+      Doctors
+    </button>
+    <button
+      mat-raised-button
+      routerLink="upcomingConsultations"
+      routerLinkActive="active-button"
+    >
+      Upcoming consultation
+    </button>
+    <button
+      mat-raised-button
+      routerLink="healthRecords"
+      routerLinkActive="active-button"
+    >
+      Health records
+    </button>
+  </div>
+</ng-container>
+
+<ng-template #isDoctor>
+  <div class="container">
+    <button
+      mat-raised-button
+      routerLink="dashboard"
+      routerLinkActive="active-button"
+    >
+      Dashboard
+    </button>
+    <button
+      mat-raised-button
+      routerLink="consultaitonRequests"
+      routerLinkActive="active-button"
+    >
+      Request
+    </button>
+    <button
+      mat-raised-button
+      routerLink="upcomingConsultations"
+      routerLinkActive="active-button"
+    >
+      Upcoming consultation
+    </button>
+    <button
+      mat-raised-button
+      routerLink="patients"
+      routerLinkActive="active-button"
+    >
+      Population
+    </button>
+  </div>
+</ng-template>

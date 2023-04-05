@@ -1,0 +1,53 @@
+.item {
+  display: grid;
+  grid-template-columns: 30% 70%;
+
+  border: 1px solid black;
+
+  .date {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    border-right: 1px solid black;
+    height: 5rem;
+  }
+}
+
+.info {
+  align-items: center;
+  padding-left: 1rem;
+  gap: 0.5rem;
+
+  display: flex;
+  h6 {
+    padding: 0px;
+    margin: 0px;
+  }
+
+  p {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+.doctorsInfo {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  .info {
+    padding-left: 25%;
+  }
+  .photo {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 100%;
+    background-color: black;
+  }
+
+  button {
+    margin: 2rem;
+    margin-left: 30%;
+    width: 10rem;
+  }
+}

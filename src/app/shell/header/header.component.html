@@ -1,0 +1,7 @@
+<div class="container" *ngIf="currentUser">
+  <a class="logo" href="#">MEDBOOKER</a>
+  <div class="user">
+    <h6>{{ currentUser.firstName }} {{ currentUser.lastName }}</h6>
+    <button mat-raised-button (click)="logout()">Log out</button>
+  </div>
+</div>

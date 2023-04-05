@@ -1,0 +1,28 @@
+.grid-container {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 40% 40%;
+  gap: 20%;
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  h4 {
+    margin: 0px;
+  }
+}
+
+.routes {
+  border-left: 1px solid black;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}

@@ -1,0 +1,32 @@
+:host {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+a {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h6 {
+  margin: 0px;
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    width: 9rem;
+    height: 3rem;
+  }
+}
+
+::ng-deep nb-layout-header nav .nbButton {
+  background-color: red;
+}

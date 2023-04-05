@@ -1,0 +1,42 @@
+<div *ngIf="selectedBooking">
+  <div class="item">
+    <div class="date">
+      {{ selectedBooking.startTime | date : "medium" }}
+    </div>
+    <div class="info">
+      <div>
+        <h6>Upcoming Consultation</h6>
+        <p>{{ selectedBooking.status }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="doctorsInfo">
+    <div class="info">
+      <div class="photo"></div>
+
+      <div *ngIf="currentUser?.entityNo === roles.PATIENT" class="flex">
+        <span *ngIf="doctorInfo">
+          <div>
+            {{ doctorInfo.firstName }}
+            {{ doctorInfo.lastName }}
+          </div>
+          <div>practiceNo: {{ doctorInfo.practiceNo }}</div>
+        </span>
+      </div>
+
+      <div *ngIf="currentUser?.entityNo === roles.DOCTOR">
+        <span *ngIf="patientInfo">
+          {{ patientInfo.firstName }}
+          {{ patientInfo.lastName }}
+        </span>
+      </div>
+    </div>
+    <button
+      *ngIf="upcomingConsultation"
+      mat-raised-button
+      (click)="cancelBooking(selectedBooking.id)"
+    >
+      Cancel Booking
+    </button>
+  </div>
+</div>

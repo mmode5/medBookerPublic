@@ -1,0 +1,10 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <app-header [currentUser]="currentUser"></app-header>
+  </nb-layout-header>
+  <nb-sidebar><app-sidebar [currentUser]="currentUser"></app-sidebar></nb-sidebar>
+
+  <nb-layout-column>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>

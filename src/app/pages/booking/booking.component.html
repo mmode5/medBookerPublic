@@ -1,0 +1,30 @@
+<nb-card *ngIf="practitioners$ | async as practitioner">
+  <nb-card-header>
+    <ng-container>
+      <div class="doctor flex">
+        <div class="info">
+          <div class="photo"></div>
+          <div class="flex">
+            <h6>{{ practitioner?.firstName }} {{ practitioner?.lastName }}</h6>
+            <p>Doctor specialisation: {{ practitioner.practiceNo }}</p>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </nb-card-header>
+  <nb-card-body>
+    <input
+      nbInput
+      placeholder="Pick Date"
+      [nbDatepicker]="dateTimePicker"
+      [(ngModel)]="selectedDate"
+    />
+    <nb-date-timepicker
+      #dateTimePicker
+      singleColumn
+      [step]="30"
+      [min]="minDate"
+    ></nb-date-timepicker>
+  </nb-card-body>
+  <button mat-raised-button (click)="Book(practitioner)">Book</button>
+</nb-card>

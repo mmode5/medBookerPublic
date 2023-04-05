@@ -1,0 +1,24 @@
+<ng-template #loaded>
+  <div *ngIf="currentUser && bookings$ | async as bookings">
+    <div class="grid-container">
+      <div class="list">
+        <h4>Consultation requests</h4>
+        <div *ngIf="!bookings.length">You have no upcoming consultations</div>
+        <app-single-consultation
+          *ngFor="let booking of bookings; trackBy: identity"
+          [booking]="booking"
+          (bookingStatusChange)="refreshBookings($event)"
+        ></app-single-consultation>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-container *ngIf="loadingSpinner | async; else loaded">
+  <div class="center">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="40"
+    ></mat-progress-spinner>
+  </div>
+</ng-container>

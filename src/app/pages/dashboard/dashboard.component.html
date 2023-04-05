@@ -1,0 +1,62 @@
+<div *ngIf="currentUser">
+  <div *ngIf="currentUser.entityNo === roles.PATIENT">
+    <div class="routes">
+      <mat-card routerLink="/search">
+        <mat-card-content>
+          <h3>Need to see a doctor?</h3>
+          <p>
+            Serach for a heathcare Professional close to you using the find a
+            provider tool.
+          </p>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card routerLink="/upcomingConsultations">
+        <mat-card-content>
+          <h3>Upcoming consultations</h3>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card routerLink="/healthRecords">
+        <mat-card-content>
+          <h3>Health records</h3>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="grid-container" *ngIf="currentUser.entityNo === roles.DOCTOR">
+    <div class="list" *ngIf="bookings$ | async as bookings">
+      <h4>Upcoming consultations</h4>
+      <ng-template #loaded>
+        <div *ngIf="!bookings.length">You have no upcoming consultations</div>
+        <app-single-consultation
+          *ngFor="let booking of bookings | slice : 0 : 5; trackBy: identity"
+          [booking]="booking"
+          (bookingStatusChange)="refreshBookings($event)"
+        ></app-single-consultation>
+      </ng-template>
+      <ng-container *ngIf="loadingSpinner | async; else loaded">
+        <div class="center">
+          <mat-progress-spinner
+            mode="indeterminate"
+            diameter="40"
+          ></mat-progress-spinner>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="routes">
+      <mat-card routerLink="/upcomingConsultations">
+        <mat-card-content>
+          <h3>Upcoming consultations</h3>
+        </mat-card-content>
+      </mat-card>
+      <mat-card routerLink="/patients">
+        <mat-card-content>
+          <h3>Population</h3>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

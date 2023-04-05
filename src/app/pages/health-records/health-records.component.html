@@ -1,0 +1,41 @@
+<ng-template #loaded>
+  <div *ngIf="currentUser && bookings$ | async as bookings; else loading">
+    <div class="grid-container">
+      <div class="list">
+        <h4>Health records</h4>
+        <div *ngIf="!bookings.length">You have no health records</div>
+        <app-single-consultation
+          *ngFor="let booking of bookings | slice : 0 : 5; trackBy: identity"
+          [booking]="booking"
+          (click)="onBookingClick(booking)"
+        ></app-single-consultation>
+      </div>
+
+      <div class="routes" *ngIf="selectedBooking$ | async as selectedBooking">
+        <div class="list">
+          <app-seleceted-consultation
+            [selectedBooking]="selectedBooking"
+          ></app-seleceted-consultation>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loading>
+  <div class="center">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="40"
+    ></mat-progress-spinner>
+  </div>
+</ng-template>
+
+<ng-container *ngIf="loadingSpinner | async; else loaded">
+  <div class="center">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="40"
+    ></mat-progress-spinner>
+  </div>
+</ng-container>
